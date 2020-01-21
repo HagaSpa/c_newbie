@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+typedef struct linked_list linked_list;
+
 // 連結リストの構造体
 struct linked_list {
   int data;
@@ -11,8 +13,8 @@ struct linked_list {
 http://web.wakayama-u.ac.jp/~tac/pointer/
 */
 void main(void) {
-  struct linked_list *root;
-  struct linked_list *p;
+  linked_list *root;
+  linked_list *p;
 
   // mallocの仕様でメモリ確保できなかったらNULLが来る
   p = malloc(sizeof(struct linked_list));
