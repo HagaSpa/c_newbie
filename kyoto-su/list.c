@@ -57,6 +57,18 @@ int nodeCount(node_t *ndPtr) {
   return count;
 }
 
+/*
+新しいノードを作成し、ポインタの値を新しい要素へ向けてセットする
+*/
+int nodePrepend(node_t **ndPtrPtr, data_t dt) {
+  node_t *newNd = nodeNew(dt, *ndPtrPtr);
+  if (newNd == NULL) {
+    return FAILURE;
+  }
+  ndPtrPtr = &newNd; // ANS: *ndPtrPtr = newNd;
+  return SUCCESS;
+}
+
 
 void main(void) {
   node_t nd1, nd2, nd3;
@@ -83,4 +95,11 @@ void main(void) {
   /* 線形リスト */
   list_t list;
 
+  // 連結リストを初期化
+  node_t **ndPtrPtr;
+  p = &nd1;
+  ndPtrPtr = &p;
+  // 新しいノードの値
+  data_t dt = 109;
+  int res = nodePrepend(ndPtrPtr, dt);
 }
