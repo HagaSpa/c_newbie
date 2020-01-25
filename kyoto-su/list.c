@@ -65,7 +65,15 @@ int nodePrepend(node_t **ndPtrPtr, data_t dt) {
   if (newNd == NULL) {
     return FAILURE;
   }
-  ndPtrPtr = &newNd; // ANS: *ndPtrPtr = newNd;
+  /*
+  ndPtrPtrが保持するアドレス（pのアドレス）に保存されている値
+  つまりnd1のアドレスを、newNdのアドレスで上書きしている。
+  → 連結リストの先頭を、新しいノードで変更している。
+  */
+  *ndPtrPtr = newNd;
+
+  printf("%p\n", newNd);
+  printf("%p\n", &newNd);
   return SUCCESS;
 }
 
@@ -97,7 +105,9 @@ void main(void) {
 
   // 連結リストを初期化
   node_t **ndPtrPtr;
+  // 先頭のノードをもつポインタ
   p = &nd1;
+  // pのアドレスをもつポインタ ndPtrPtr -> p -> nd1
   ndPtrPtr = &p;
   // 新しいノードの値
   data_t dt = 109;
