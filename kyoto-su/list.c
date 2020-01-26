@@ -77,6 +77,34 @@ int nodePrepend(node_t **ndPtrPtr, data_t dt) {
   return SUCCESS;
 }
 
+/*
+リスト中の指定されたindexのノードを削除する
+
+**ndPtrPtr:
+  連結リストの先頭ノードのアドレスを格納したポインタの、アドレスを保持したポインタ変数
+n:
+  削除したいノードのindex
+*/
+int nodeDelete(node_t **ndPtrPtr, int n) {
+  // 指定されたindexまで遡る
+  while (n > 0 && *ndPtrPtr != NULL) {
+    ndPtrPtr = &((*ndPtrPtr)->next); // *ndPtrPtrを進める
+    n--;
+  }
+
+  // nが連結リストのノード数を超えていた場合
+  if (*ndPtrPtr == NULL) {
+    return FAILURE;
+  }
+
+  // 連結リストの付け替え
+  node_t *p;
+  p = (*ndPtrPtr)->next; // 削除対象のノードの次のアドレスを格納
+  free(*ndPtrPtr);       // ノードの削除実行
+  *ndPtrPtr = p;          // 削除対象のノードを格納していたポインタに、次のノードのアドレスを格納
+  return SUCCESS;
+}
+
 
 void main(void) {
   node_t nd1, nd2, nd3;
@@ -112,4 +140,7 @@ void main(void) {
   // 新しいノードの値
   data_t dt = 109;
   int res = nodePrepend(ndPtrPtr, dt);
+
+  /* ノードの削除 */
+  nodeDelete(ndPtrPtr, 0);
 }
