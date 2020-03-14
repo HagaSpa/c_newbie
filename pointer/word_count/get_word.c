@@ -7,7 +7,7 @@
  * ファイルを読み込んで、１つずつ単語を返却する。
  * 
  */
-int getword(char *buf, int buf_size, FILE *fp)
+int get_word(char *buf, int buf_size, FILE *fp)
 {
     int len;
     int ch;
@@ -31,16 +31,4 @@ int getword(char *buf, int buf_size, FILE *fp)
 
     buf[len] = '\0';
     return len;
-}
-
-/* Test Method*/
-int main(void) 
-{
-    char buf[256];
-
-    while (getword(buf, 256, stdin) != EOF) {
-        printf("<<%s>>\n", buf);
-    }
-    
-    return 0;
 }
